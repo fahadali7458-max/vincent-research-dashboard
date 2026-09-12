@@ -185,17 +185,21 @@ app.get('/api/inquiries', (req, res) => {
 const distPath = path.join(__dirname, '..', 'dist');
 if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
-  app.get('*', (req, res, next) => {
+  
+  // Express 5 compatible SPA fallback middleware
+  app.use((req, res, next) => {
+    if (req.method !== 'GET') return next();
     if (req.path.startsWith('/api')) return next();
     res.sendFile(path.join(distPath, 'index.html'));
   });
   console.log(`[PRODUCTION] Serving frontend static assets from ${distPath}`);
 }
 
-app.listen(PORT, () => {
+const HOST = '0.0.0.0';
+app.listen(PORT, HOST, () => {
   console.log(`\n======================================================`);
   console.log(`  VINCENT RESEARCH MARKET INTELLIGENCE BACKEND API`);
-  console.log(`  Status: Active on http://localhost:${PORT}`);
+  console.log(`  Status: Active on http://${HOST}:${PORT}`);
   console.log(`  Endpoints: /api/stats, /api/feasibility, /api/rfp, /api/newsletter`);
   console.log(`======================================================\n`);
 });

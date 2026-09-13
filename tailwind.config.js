@@ -15,8 +15,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
-        display: ['Syne', 'sans-serif'],
+        sans: ['"MD Primer"', '"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+        display: ['"MD Primer"', 'sans-serif'],
       },
       animation: {
         'marquee-left': 'marqueeLeft 30s linear infinite',
